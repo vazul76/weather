@@ -1,0 +1,264 @@
+/* ── Typography ── */
+body {
+    font-family: 'Poppins', sans-serif;
+}
+
+/* ── Widget ── */
+.weather-widget {
+    background-color: #ffffff;
+    border-radius: 22px;
+    box-shadow: 0 6px 24px rgba(0,0,0,0.10), 0 1.5px 4px rgba(0,0,0,0.06);
+    padding: 32px 24px 28px;
+    margin: 10px auto;
+    max-width: 390px;
+    min-height: 0;
+    position: relative;
+    overflow: hidden;
+}
+
+/* ── SVG background animasi ── */
+#weather-svg {
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    border-radius: 22px;
+    pointer-events: none;
+    overflow: hidden;
+    z-index: 0;
+}
+
+/* ── Lightning shake ── */
+.wx-shake { animation: wxShake 0.5s ease; }
+@keyframes wxShake {
+    0%,100% { transform: translateX(0); }
+    20%     { transform: translateX(-4px); }
+    40%     { transform: translateX(4px); }
+    60%     { transform: translateX(-3px); }
+    80%     { transform: translateX(3px); }
+}
+
+/* ── Fade transitions ── */
+.weather-content {
+    position: relative;
+    z-index: 1;
+    transition: opacity 0.35s ease, transform 0.35s ease;
+    opacity: 1;
+    transform: translateY(0);
+}
+.weather-content.fade-out {
+    opacity: 0;
+    transform: translateY(12px);
+}
+.weather-content.fade-in {
+    animation: slideIn 0.4s ease forwards;
+}
+@keyframes slideIn {
+    from { opacity: 0; transform: translateY(-12px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ── Top section ── */
+.wx-top {
+    margin-bottom: 10px;
+}
+.wx-temp-row {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    margin-bottom: 4px;
+}
+.wx-temp {
+    font-size: 7rem;
+    font-weight: 700;
+    line-height: 1;
+    color: #1a2535;
+    letter-spacing: -4px;
+}
+.weather-icon {
+    width: 100px;
+    height: 100px;
+    display: block;
+    overflow: visible;
+    flex-shrink: 0;
+}
+@keyframes floatIcon {
+    0%, 100% { transform: translateY(0); }
+    50%       { transform: translateY(-6px); }
+}
+.wx-city {
+    font-size: 2.4rem;
+    font-weight: 700;
+    color: #2a3a4a;
+    text-align: center;
+    margin-bottom: 14px;
+    letter-spacing: 0.01em;
+}
+
+/* ── Condition badge ── */
+.wx-condition {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 18px 4px 10px;
+    margin-bottom: 8px;
+}
+.wx-cond-icon {
+    font-size: 1.4rem;
+    line-height: 1;
+}
+.wx-cond-text {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: #334455;
+    text-transform: capitalize;
+}
+
+/* ── Detail list ── */
+.wx-details {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    padding-top: 4px;
+}
+.wx-detail-item {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 2px;
+}
+.wx-detail-label {
+    font-size: 1.5rem;
+    color: #000000;
+    font-weight: 700;
+}
+.wx-detail-val {
+    font-size: 1.5rem;
+    font-weight: 500;
+    color: #556677;
+}
+.wx-detail-item i { display: none; }
+.icon-wind     { color: #5b9bd5; }
+.icon-humidity { color: #38a0d4; }
+
+/* ── Sun rays ──────────────────────────────────────────── */
+.wx-longRay {
+    stroke: orange;
+    stroke-width: 2.5;
+    stroke-linecap: round;
+    stroke-dasharray: 25;
+    stroke-dashoffset: 25;
+    animation: wxLongRay 4s ease-in-out infinite;
+}
+.wx-shortRay {
+    stroke: gold;
+    stroke-width: 1.8;
+    stroke-linecap: round;
+    stroke-dasharray: 20;
+    stroke-dashoffset: 20;
+    animation: wxShortRay 3s ease-in-out infinite;
+}
+@keyframes wxLongRay {
+    0%   { stroke-dashoffset: 25; opacity: 0.3; }
+    50%  { stroke-dashoffset: 0;  opacity: 1;   }
+    100% { stroke-dashoffset: 25; opacity: 0.3; }
+}
+@keyframes wxShortRay {
+    0%   { stroke-dashoffset: 20; opacity: 0.2; }
+    50%  { stroke-dashoffset: 0;  opacity: 1;   }
+    100% { stroke-dashoffset: 20; opacity: 0.2; }
+}
+
+/* ── Stars (malam cerah) ───────────────────────────────── */
+.wx-star        { animation: wxFlash 2.5s ease-in-out infinite; }
+.wx-star-d1     { animation-delay: 0.8s; }
+.wx-star-d2     { animation-delay: 1.6s; }
+@keyframes wxFlash {
+    0%, 100% { opacity: 0.2; }
+    50%      { opacity: 1;   }
+}
+
+/* ── Cloud float ───────────────────────────────────────── */
+.wx-floatCloud  { animation: wxFloatC  8s ease-in-out infinite; }
+.wx-floatCloudR { animation: wxFloatCR 6s ease-in-out infinite; }
+@keyframes wxFloatC {
+    0%,100% { transform: translate(0,0); }
+    50%     { transform: translate(-5px,-3px); }
+}
+@keyframes wxFloatCR {
+    0%,100% { transform: translate(0,0); }
+    50%     { transform: translate(5px,3px); }
+}
+
+/* ── Rain drops ────────────────────────────────────────── */
+.wx-drop {
+    animation: wxDrop 1.5s linear infinite;
+}
+.wx-drop-d05 { animation-delay: 0.5s; }
+.wx-drop-d08 { animation-delay: 0.8s; }
+.wx-drop-d1  { animation-delay: 1.0s; }
+@keyframes wxDrop {
+    0%   { transform: translateY(0);    opacity: 1; }
+    80%  { transform: translateY(22px); opacity: 0.6; }
+    100% { transform: translateY(26px); opacity: 0; }
+}
+
+/* ── Drizzle ───────────────────────────────────────────── */
+.wx-drizzleLine {
+    stroke: #7ec8e3;
+    stroke-width: 2;
+    stroke-linecap: round;
+    stroke-dasharray: 38;
+    stroke-dashoffset: 38;
+    animation: wxDrizzle 5s linear infinite;
+}
+@keyframes wxDrizzle {
+    0%   { stroke-dashoffset: 38; opacity: 0.5; }
+    50%  { stroke-dashoffset: 10; opacity: 1; }
+    100% { stroke-dashoffset: 38; opacity: 0.5; }
+}
+
+/* ── Snow flakes ───────────────────────────────────────── */
+.wx-snow {
+    stroke: #b0d4f1;
+    stroke-width: 1.5;
+    fill: none;
+    stroke-linecap: round;
+    animation: wxSnow 3s ease-in-out infinite;
+}
+.wx-snow-d05 { animation-delay: 0.5s; }
+.wx-snow-d08 { animation-delay: 0.8s; }
+.wx-snow-d1  { animation-delay: 1.2s; }
+@keyframes wxSnow {
+    0%   { transform: translate(0,0);    opacity: 0; }
+    20%  { opacity: 1; }
+    80%  { opacity: 0.7; }
+    100% { transform: translate(3px,20px); opacity: 0; }
+}
+
+/* ── Thunder bolt ─────────────────────────────────────── */
+.wx-bolt {
+    animation: wxBolt 2.5s ease-in-out infinite;
+}
+.wx-bolt-d1 { animation-delay: 1.2s; }
+@keyframes wxBolt {
+    0%,90%,100% { opacity: 0; }
+    93%         { opacity: 1; }
+    96%         { opacity: 0.3; }
+    99%         { opacity: 1; }
+}
+
+/* ── Mist ──────────────────────────────────────────────── */
+.wx-mist path {
+    stroke: #c8d8e0;
+    stroke-width: 3;
+    fill: none;
+    stroke-linecap: round;
+    animation: wxMist 5s ease-in-out infinite alternate;
+}
+@keyframes wxMist {
+    from { transform: translateX(-10px); opacity: 0.5; }
+    to   { transform: translateX(10px);  opacity: 1; }
+}
+
