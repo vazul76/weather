@@ -333,7 +333,7 @@ async function fetchWeather(city) {
             await new Promise(resolve => setTimeout(resolve, 350));
         }
 
-        weatherWidget.querySelectorAll('.weather-content, .weather-details').forEach(el => el.remove());
+        weatherWidget.querySelectorAll('.weather-content, .weather-details, .alert').forEach(el => el.remove());
 
         const html = `
             <div class="weather-content">
@@ -369,8 +369,8 @@ async function fetchWeather(city) {
             setTimeout(() => el.classList.remove('fade-in'), 500);
         });
     } catch (err) {
-        console.error(`Error fetching weather for ${city}:`, err);
-        weatherWidget.innerHTML = '<div class="alert alert-danger">Gagal memuat data cuaca.</div>';
+        console.error(`[Weather] Gagal memuat data cuaca untuk ${city}:`, err);
+        // Biarkan tampilan sebelumnya tetap muncul, retry otomatis via setInterval
     }
 }
 
